@@ -24,6 +24,8 @@ WIP
 | Constant Name   |      Description      |  Type |
 |----------|:-------------:|------:|
 | APIAI_ACCESS_TOKEN |  Your api.ai Client Access Token | REQUIRED |
+| FB_PAGE_ACCESS_TOKEN |  Facebook Page Access Token | REQUIRED |
+| FB_VERIFY_TOKEN | Verify Token for Facebook | REQUIRED |
 
 
 Go to the root of the project and
