@@ -1,6 +1,25 @@
 'use strict';
 
-var apiaiService = require('./apiaiService');
+const apiaiService = require('./apiaiService');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const constants = require('./constants');
+const fbMessengerService = require('./fbMessengerService');
+
+app.use(bodyParser.text({ type: 'application/json' }));
+
+app.get('/webhook/', function (req, res) {
+    if (req.query['hub.verify_token'] == constants.FB_VERIFY_TOKEN) {
+        res.send(req.query['hub.challenge']);
+
+        setTimeout(function () {
+            fbMessengerService.doSubscribeRequest();
+        }, 3000);
+    } else {
+        res.send('Error, wrong validation token');
+    }
+});
 
 exports.sayHello = function (user) {
     return "Hello " + user;
@@ -10,10 +29,12 @@ var sendTextMessageToApiAi = function (message) {
     apiaiService.initiateSendMessage(message,"123");
 }
 
-
 module.exports.receivedTextMessageFromApiAi = function (error,response) {
     if(error) return console.error("Error from API AI"+error);
     console.log(response);
 }
 
 sendTextMessageToApiAi("Hi");
+
+
+
