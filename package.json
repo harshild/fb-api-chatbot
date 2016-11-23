@@ -16,5 +16,9 @@
   ],
   "author": "Harshil Dhariwal",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/harshild/job-chatbot#readme"
+  "homepage": "https://bitbucket.org/harshild/job-chatbot#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
 }
