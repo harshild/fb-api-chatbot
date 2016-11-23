@@ -1,18 +1,22 @@
 var apiai = require('apiai');
 var constants = require('./constants')
+var main = require('./main')
 
-var app = apiai(exports.APIAI_ACCESS_TOKEN);
+module.exports.initiateSendMessage = function (textQuery, sessionId) {
+    var app = apiai(constants.APIAI_ACCESS_TOKEN);
+    var responseData;
 
-var request = app.textRequest('<Your text query>', {
-    sessionId: '<unique session id>'
-});
+    var request = app.textRequest(textQuery, {
+        sessionId: sessionId
+    })
 
-request.on('response', function(response) {
-    console.log(response);
-});
+    .on('response', function (response) {
+        main.receivedTextMessageFromApiAi(null,response);
+    })
 
-request.on('error', function(error) {
-    console.log(error);
-});
+    .on('error', function (error) {
+        main.receivedTextMessageFromApiAi(error,null);
+    });
 
-request.end();
+    request.end();
+}
