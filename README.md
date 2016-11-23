@@ -15,3 +15,9 @@ WIP
 *   Facebook Messenger Connectivity
 
 *   Integration of Facebook Messenger and API.AI (Only Text Messages)
+
+#How To Run
+
+Go to the root of the project and
+
+`npm start`
