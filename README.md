@@ -8,7 +8,7 @@ WIP
 
 ## Basic Development RoadMap
 
-*   Creating Basic Node Server Architecture
+*   ~~Creating Basic Node Server Architecture~~
 
 *   Establishing API.AI connectivity
 
