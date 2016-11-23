@@ -16,8 +16,22 @@ WIP
 
 *   Integration of Facebook Messenger and API.AI (Only Text Messages)
 
-#How To Run
+
+# BUILD CODE
 
 Go to the root of the project and
+
+`npm install`
+
+##How To Run Tests
+
+WINDOWS
+`node_modules\.bin\mocha --reporter spec`
+
+LINUX
+`./node_modules/.bin/mocha --reporter spec`
+
+
+##How To Run
 
 `npm start`
