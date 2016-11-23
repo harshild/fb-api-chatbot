@@ -1,0 +1,1 @@
+exports.APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN

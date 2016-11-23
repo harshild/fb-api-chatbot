@@ -1,6 +1,7 @@
 var apiai = require('apiai');
+var constants = require('./constants')
 
-var app = apiai("<your client access token>");
+var app = apiai(exports.APIAI_ACCESS_TOKEN);
 
 var request = app.textRequest('<Your text query>', {
     sessionId: '<unique session id>'
