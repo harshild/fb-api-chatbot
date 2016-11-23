@@ -6,7 +6,7 @@ exports.sayHello = function (user) {
     return "Hello " + user;
 }
 
-module.exports.sendTextMessageToApiAi = function (message) {
+var sendTextMessageToApiAi = function (message) {
     apiaiService.initiateSendMessage(message,"123");
 }
 
@@ -16,3 +16,4 @@ module.exports.receivedTextMessageFromApiAi = function (error,response) {
     console.log(response);
 }
 
+sendTextMessageToApiAi("Hi");
