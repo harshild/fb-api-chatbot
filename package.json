@@ -1,0 +1,24 @@
+{
+  "name": "job-chatbot",
+  "version": "0.0.1",
+  "description": "Chat bot for Job Application",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/harshild/job-chatbot.git"
+  },
+  "keywords": [
+    "chatbot"
+  ],
+  "author": "Harshil Dhariwal",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/harshild/job-chatbot#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
