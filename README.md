@@ -10,7 +10,7 @@ WIP
 
 *   ~~Creating Basic Node Server Architecture~~
 
-*   Establishing API.AI connectivity
+*   ~~Establishing API.AI connectivity~~
 
 *   Facebook Messenger Connectivity
 
