@@ -1,7 +1,5 @@
 'use strict';
 
-function sayHello(user){
-    console.log("Hello "+user);
+exports.sayHello = function(user) {
+    return "Hello " + user;
 }
-
-sayHello("Application");
