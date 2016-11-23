@@ -25,12 +25,7 @@ Go to the root of the project and
 
 ##How To Run Tests
 
-WINDOWS
-`node_modules\.bin\mocha --reporter spec`
-
-LINUX
-`./node_modules/.bin/mocha --reporter spec`
-
+`npm test`
 
 ##How To Run
 
