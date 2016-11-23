@@ -4,6 +4,7 @@ const apiaiService = require('./apiaiService');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
 
@@ -20,6 +21,39 @@ app.get('/webhook/', function (req, res) {
         res.send('Error, wrong validation token');
     }
 });
+
+
+app.post('/webhook/', function (req, res) {
+    try {
+        var data = jsonBigInt.parse(req.body);
+
+        if (data.entry) {
+            var entries = data.entry;
+            entries.forEach(function (entry) {
+                var messaging_events = entry.messaging;
+                if (messaging_events) {
+                    messaging_events.forEach(function (event) {
+                        if (event.message && !event.message.is_echo ||
+                            event.postback && event.postback.payload) {
+                            console.log(event);
+                        }
+                    });
+                }
+            });
+        }
+
+        return res.status(200).json({
+            status: "ok"
+        });
+    } catch (err) {
+        return res.status(400).json({
+            status: "error",
+            error: err
+        });
+    }
+
+});
+
 
 exports.sayHello = function (user) {
     return "Hello " + user;
