@@ -101,6 +101,11 @@ module.exports.responseFromApiAI = function (error, response) {
     }
 }
 
+app.listen(constants.REST_PORT, function () {
+    console.log('Rest service ready on port ' + REST_PORT);
+});
+
+
 if (constants.areAllMandatoryConstantsAvailable) {
     fbMessengerService.doSubscribeRequest();
 }

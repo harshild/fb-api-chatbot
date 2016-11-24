@@ -21,12 +21,13 @@ WIP
 
 ##Application constants as Environment Variable
 
-| Constant Name   |      Description      |  Type |
-|----------|:-------------:|------:|
-| APIAI_ACCESS_TOKEN |  Your api.ai Client Access Token | REQUIRED |
-| FB_PAGE_ACCESS_TOKEN |  Facebook Page Access Token | REQUIRED |
-| FB_VERIFY_TOKEN | Verification Token for Facebook | REQUIRED |
-
+| Constant Name   |      Description      |  Type |  Default |
+|----------|:-------------:|------:|------:|
+| APIAI_ACCESS_TOKEN |  Your api.ai Client Access Token | REQUIRED | N/A
+| FB_PAGE_ACCESS_TOKEN |  Facebook Page Access Token | REQUIRED | N/A
+| FB_VERIFY_TOKEN | Verification Token for Facebook | REQUIRED | N/A
+| APIAI_LANG |  Language for API AI | Optional | 'en'
+| REST_PORT | Port on which application listens | REQUIRED | 5000
 
 Go to the root of the project and
 
