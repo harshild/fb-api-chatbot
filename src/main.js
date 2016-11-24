@@ -4,6 +4,7 @@ const apiaiService = require('./apiaiService');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const async = require('async');
 const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
@@ -11,22 +12,17 @@ const appUtils = require('./appUtils');
 
 app.use(bodyParser.text({ type: 'application/json' }));
 
-const sessionIds = new Map();
-
 function processMessagingRequest(event) {
     var sender = event.sender.id.toString();
 
-    if (fbMessengerService.isEventaTextMessage) {
+    
+    if (fbMessengerService.isEventATextMessage(event)) {
         var text = event.message ? event.message.text : event.postback.payload;
 
-        if (!sessionIds.has(sender)) {
-            sessionIds.set(sender, uuid.v1());
-        }
+        appUtils.setSessionId(sender);
         console.log("Text", text);
 
-        apiaiService.sendMessage(test, {
-            sessionId: sessionIds.get(sender)
-        });
+        apiaiService.sendMessage(text,sender );
 
     }
 }
@@ -74,24 +70,22 @@ app.post('/webhook/', function (req, res) {
 
 });
 
-exports.sayHello = function (user) {
+module.exports.sayHello = function (user) {
     return "Hello " + user;
 }
 
-var sendTextMessageToApiAi = function (message) {
-    apiaiService.sendMessage(message, "123");
-}
-
-module.exports.responseFromApiAI = function (error, response) {
+module.exports.responseFromApiAI = function (error, response,sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
+        //TODO Refactoring needed to handle blank response
         var responseText = response.result.fulfillment.speech;
-        var responseParameters = response.result.parameters;
-        var responseContexts = response.result.contexts;;
-
-        if (appUtils.isObjectDefined(responseText)) {
+        
+        if (appUtils.isObjectDefined(responseText) || responseText == "") {
             console.log('Response as text message' + responseText);
-            var splittedText = appUtils.splitStringResponse(responseText);
+            var splittedText = "?";
+            if(responseText != "") {
+                splittedText = appUtils.splitStringResponse(responseText);
+            }
 
             async.eachSeries(splittedText, function (textPart, callback) {
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);

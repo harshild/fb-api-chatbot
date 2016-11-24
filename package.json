@@ -1,6 +1,6 @@
 {
   "name": "job-chatbot",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Chat bot for Job Application",
   "main": "src/main.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "express": "^4.14.0",
     "json-bigint": "^0.2.1",
     "mocha": "^3.1.2",
+    "node-uuid": "^1.4.7",
     "request": "^2.79.0"
   }
 }
