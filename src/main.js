@@ -102,7 +102,7 @@ module.exports.responseFromApiAI = function (error, response) {
 }
 
 app.listen(constants.REST_PORT, function () {
-    console.log('Rest service ready on port ' + REST_PORT);
+    console.log('Rest service ready on port ' + constants.REST_PORT);
 });
 
 
