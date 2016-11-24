@@ -81,7 +81,10 @@ module.exports.responseFromApiAI = function (error, response,sender) {
 
         if (appUtils.isObjectDefined(responseText)) {
             console.log('Response as text message' + responseText);
-            var splittedText = appUtils.splitStringResponse(responseText);
+            var splittedText = "?";
+            if(responseText != "") {
+                splittedText = appUtils.splitStringResponse(responseText);
+            }
 
             async.eachSeries(splittedText, function (textPart, callback) {
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
