@@ -7,8 +7,13 @@ const bodyParser = require('body-parser');
 const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
+const appUtils = require('./appUtils');
 
 app.use(bodyParser.text({ type: 'application/json' }));
+
+function processEvent(event) {
+
+}
 
 app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] == constants.FB_VERIFY_TOKEN) {
@@ -22,7 +27,6 @@ app.get('/webhook/', function (req, res) {
     }
 });
 
-
 app.post('/webhook/', function (req, res) {
     try {
         var data = jsonBigInt.parse(req.body);
@@ -35,7 +39,7 @@ app.post('/webhook/', function (req, res) {
                     messaging_events.forEach(function (event) {
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
-                            console.log(event);
+                            processEvent(event);
                         }
                     });
                 }
@@ -53,7 +57,6 @@ app.post('/webhook/', function (req, res) {
     }
 
 });
-
 
 exports.sayHello = function (user) {
     return "Hello " + user;
