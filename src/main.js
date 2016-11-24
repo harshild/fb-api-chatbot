@@ -7,8 +7,29 @@ const bodyParser = require('body-parser');
 const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
+const appUtils = require('./appUtils');
 
 app.use(bodyParser.text({ type: 'application/json' }));
+
+const sessionIds = new Map();
+
+function processMessagingRequest(event) {
+    var sender = event.sender.id.toString();
+
+    if (fbMessengerService.isEventaTextMessage) {
+        var text = event.message ? event.message.text : event.postback.payload;
+
+        if (!sessionIds.has(sender)) {
+            sessionIds.set(sender, uuid.v1());
+        }
+        console.log("Text", text);
+
+        apiaiService.sendMessage(test, {
+            sessionId: sessionIds.get(sender)
+        });
+
+    }
+}
 
 app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] == constants.FB_VERIFY_TOKEN) {
@@ -22,7 +43,6 @@ app.get('/webhook/', function (req, res) {
     }
 });
 
-
 app.post('/webhook/', function (req, res) {
     try {
         var data = jsonBigInt.parse(req.body);
@@ -35,7 +55,7 @@ app.post('/webhook/', function (req, res) {
                     messaging_events.forEach(function (event) {
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
-                            console.log(event);
+                            processMessagingRequest(event);
                         }
                     });
                 }
@@ -54,20 +74,41 @@ app.post('/webhook/', function (req, res) {
 
 });
 
-
 exports.sayHello = function (user) {
     return "Hello " + user;
 }
 
 var sendTextMessageToApiAi = function (message) {
-    apiaiService.initiateSendMessage(message, "123");
+    apiaiService.sendMessage(message, "123");
 }
 
-module.exports.receivedTextMessageFromApiAi = function (error, response) {
+module.exports.responseFromApiAI = function (error, response) {
     if (error) return console.error("Error from API AI" + error);
-    console.log(response);
+    if (appUtils.isObjectDefined(response.result)) {
+        var responseText = response.result.fulfillment.speech;
+        var responseParameters = response.result.parameters;
+        var responseContexts = response.result.contexts;;
+
+        if (appUtils.isObjectDefined(responseText)) {
+            console.log('Response as text message' + responseText);
+            var splittedText = appUtils.splitStringResponse(responseText);
+
+            async.eachSeries(splittedText, function (textPart, callback) {
+                fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
+            });
+        }
+
+    }
 }
 
-sendTextMessageToApiAi("Hi");
+app.listen(constants.REST_PORT, function () {
+    console.log('Rest service ready on port ' + constants.REST_PORT);
+});
 
-fbMessengerService.doSubscribeRequest();
+
+if (constants.areAllMandatoryConstantsAvailable) {
+    fbMessengerService.doSubscribeRequest();
+}
+else {
+    console.error("Please check if all MANDATORY parameters are set in execution environment. For details on required variables, please refer to project's ReadME ");
+}

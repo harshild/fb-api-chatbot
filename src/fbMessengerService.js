@@ -39,3 +39,7 @@ module.exports.sendFBMessage = function (sender, messageData, callback) {
         }
     });
 }
+
+module.exports.isEventaTextMessage - function(event){
+    return (event.message && event.message.text) || (event.postback && event.postback.payload);
+}
