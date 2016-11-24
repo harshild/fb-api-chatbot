@@ -110,5 +110,5 @@ if (constants.areAllMandatoryConstantsAvailable) {
     fbMessengerService.doSubscribeRequest();
 }
 else {
-    console.error("Please check if all MANDATORY parameters are set in execution enviroment. For details on required variables, please refer to project's ReadME ");
+    console.error("Please check if all MANDATORY parameters are set in execution environment. For details on required variables, please refer to project's ReadME ");
 }
