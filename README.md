@@ -8,6 +8,10 @@ A conversational chat bot that automatically takes details from a job seeker and
 
 * Simple chat bot implementation that connects to API AI instance at the backend (which takes care of job related conversation) and messenger instance, while acting as a mediator between those requests.
 
+### 0.2.0
+
+* Now logs chat to file 
+
 # Setup the Application
 ## Pre-Requisites
 
@@ -42,11 +46,6 @@ When you are done setting these variables, go to the root of the project and
 and you are done!
 
 # UPCOMING RELEASES ROADMAP
-
-0.2.0
-
-* Log chats to file
-* Detailed Readme for setting up the application 
 
 0.3.0
 
