@@ -78,7 +78,8 @@ module.exports.responseFromApiAI = function (error, response,sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
         var responseText = response.result.fulfillment.speech;
-
+        console.log(responseText);
+        
         if (appUtils.isObjectDefined(responseText)) {
             console.log('Response as text message' + responseText);
             var splittedText = "?";
