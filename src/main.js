@@ -9,6 +9,8 @@ const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
 const appUtils = require('./appUtils');
+const chatLogger = require('./chatLogger');
+
 
 app.use(bodyParser.text({ type: 'application/json' }));
 
