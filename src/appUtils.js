@@ -6,6 +6,17 @@ module.exports.splitResponse = function(str) {
     return chunkString(str, 300);
 }
 
+function isDefined(obj) {
+    if (typeof obj == 'undefined') {
+        return false;
+    }
+    if (!obj) {
+        return false;
+    }
+    return obj != null;
+}
+
+
 function chunkString(s, len) {
     var curr = len, prev = 0;
 
