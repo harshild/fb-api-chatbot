@@ -11,22 +11,17 @@ const appUtils = require('./appUtils');
 
 app.use(bodyParser.text({ type: 'application/json' }));
 
-const sessionIds = new Map();
-
 function processMessagingRequest(event) {
     var sender = event.sender.id.toString();
 
-    if (fbMessengerService.isEventaTextMessage) {
+    
+    if (fbMessengerService.isEventATextMessage(event)) {
         var text = event.message ? event.message.text : event.postback.payload;
 
-        if (!sessionIds.has(sender)) {
-            sessionIds.set(sender, uuid.v1());
-        }
+        appUtils.setSessionId(sender);
         console.log("Text", text);
 
-        apiaiService.sendMessage(test, {
-            sessionId: sessionIds.get(sender)
-        });
+        apiaiService.sendMessage(text,sender );
 
     }
 }
@@ -74,20 +69,14 @@ app.post('/webhook/', function (req, res) {
 
 });
 
-exports.sayHello = function (user) {
+module.exports.sayHello = function (user) {
     return "Hello " + user;
 }
 
-var sendTextMessageToApiAi = function (message) {
-    apiaiService.sendMessage(message, "123");
-}
-
-module.exports.responseFromApiAI = function (error, response) {
+module.exports.responseFromApiAI = function (error, response,sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
         var responseText = response.result.fulfillment.speech;
-        var responseParameters = response.result.parameters;
-        var responseContexts = response.result.contexts;;
 
         if (appUtils.isObjectDefined(responseText)) {
             console.log('Response as text message' + responseText);
