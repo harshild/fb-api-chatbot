@@ -10,13 +10,13 @@ module.exports.initiateSendMessage = function (textQuery, sessionId) {
         sessionId: sessionId
     })
 
-    .on('response', function (response) {
-        main.receivedTextMessageFromApiAi(null,response);
-    })
+        .on('response', function (response) {
+            main.receivedTextMessageFromApiAi(null, response);
+        })
 
-    .on('error', function (error) {
-        main.receivedTextMessageFromApiAi(error,null);
-    });
+        .on('error', function (error) {
+            main.receivedTextMessageFromApiAi(error, null);
+        });
 
     request.end();
 }

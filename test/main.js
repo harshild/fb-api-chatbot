@@ -1,4 +1,4 @@
-var expect    = require("chai").expect;
+var expect = require("chai").expect;
 var main = require("../src/main");
 
 describe("Sample Test", function () {

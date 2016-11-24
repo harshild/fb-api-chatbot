@@ -60,15 +60,12 @@ exports.sayHello = function (user) {
 }
 
 var sendTextMessageToApiAi = function (message) {
-    apiaiService.initiateSendMessage(message,"123");
+    apiaiService.initiateSendMessage(message, "123");
 }
 
-module.exports.receivedTextMessageFromApiAi = function (error,response) {
-    if(error) return console.error("Error from API AI"+error);
+module.exports.receivedTextMessageFromApiAi = function (error, response) {
+    if (error) return console.error("Error from API AI" + error);
     console.log(response);
 }
 
 sendTextMessageToApiAi("Hi");
-
-
-
