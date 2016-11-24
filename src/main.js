@@ -9,21 +9,19 @@ const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
 const appUtils = require('./appUtils');
+const chatLogger = require('./chatLogger');
+
 
 app.use(bodyParser.text({ type: 'application/json' }));
 
 function processMessagingRequest(event) {
     var sender = event.sender.id.toString();
 
-    
     if (fbMessengerService.isEventATextMessage(event)) {
         var text = event.message ? event.message.text : event.postback.payload;
-
         appUtils.setSessionId(sender);
-        console.log("Text", text);
-
+        chatLogger.saveChatToFile(appUtils.getSessionId(sender),"FB User",text);
         apiaiService.sendMessage(text,sender );
-
     }
 }
 
@@ -81,13 +79,12 @@ module.exports.responseFromApiAI = function (error, response,sender) {
         var responseText = response.result.fulfillment.speech;
         
         if (appUtils.isObjectDefined(responseText) || responseText == "") {
-            console.log('Response as text message' + responseText);
             var splittedText = "?";
             if(responseText != "") {
                 splittedText = appUtils.splitStringResponse(responseText);
             }
-
             async.eachSeries(splittedText, function (textPart, callback) {
+                chatLogger.saveChatToFile(appUtils.getSessionId(sender),"Bot",textPart);
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
             });
         }
