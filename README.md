@@ -14,7 +14,7 @@ WIP
 
 *   ~~Facebook Messenger Connectivity~~
 
-*   Integration of Facebook Messenger and API.AI (Only Text Messages)
+*   ~~Integration of Facebook Messenger and API.AI (Only Text Messages)~~
 
 
 # BUILD CODE
