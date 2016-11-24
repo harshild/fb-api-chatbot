@@ -77,6 +77,7 @@ module.exports.sayHello = function (user) {
 module.exports.responseFromApiAI = function (error, response,sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
+        //TODO Refactoring needed to handle blank response
         var responseText = response.result.fulfillment.speech;
         
         if (appUtils.isObjectDefined(responseText) || responseText == "") {
