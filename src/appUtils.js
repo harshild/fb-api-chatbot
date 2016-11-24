@@ -1,4 +1,4 @@
-module.exports.splitResponse = function(str) {
+module.exports.splitStringResponse = function(str) {
     if (str.length <= 320) {
         return [str];
     }
@@ -6,7 +6,7 @@ module.exports.splitResponse = function(str) {
     return chunkString(str, 300);
 }
 
-function isDefined(obj) {
+module.exports.isObjectDefined(obj) {
     if (typeof obj == 'undefined') {
         return false;
     }
