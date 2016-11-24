@@ -4,10 +4,6 @@ const fs = require('fs');
 
 module.exports.saveChatToFile = function (sessionId,user,message) {
     fs.writeFile("/tmp/chat_log_"+sessionId+".txt", user+" : "+message, function (err) {
-        if (err) {
-            return console.log(err);
-        }
-
-        console.log("The file was saved!");
+        if (err) return console.log(err);
     });
 }
