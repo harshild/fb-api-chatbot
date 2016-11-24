@@ -69,3 +69,5 @@ module.exports.receivedTextMessageFromApiAi = function (error, response) {
 }
 
 sendTextMessageToApiAi("Hi");
+
+fbMessengerService.doSubscribeRequest();
