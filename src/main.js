@@ -4,6 +4,7 @@ const apiaiService = require('./apiaiService');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const async = require('async');
 const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
