@@ -2,11 +2,10 @@ module.exports.splitStringResponse = function(str) {
     if (str.length <= 320) {
         return [str];
     }
-
     return chunkString(str, 300);
 }
 
-module.exports.isObjectDefined(obj) {
+module.exports.isObjectDefined = function(obj) {
     if (typeof obj == 'undefined') {
         return false;
     }
