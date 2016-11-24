@@ -31,3 +31,16 @@ Go to the root of the project and
 ##How To Run
 
 `npm start`
+
+# UPCOMING RELEASES ROADMAP
+
+0.2
+* Log chats to file
+* Detailed Readme for setting up the application 
+
+0.3
+* Database connectivity to store data
+* Very basic UI Interface to view data
+
+0.4
+* Readme for alternative deployment methods (preferably Heroku and Docker)
