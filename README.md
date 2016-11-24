@@ -4,7 +4,7 @@ A conversational chat bot that automatically takes details from a job seeker and
 
 ##Release
 
-### 0.0.1
+### 0.1
 
 * Simple chat bot implementation that connects to API AI instance at the backend (which takes care of job related conversation) and messenger instance, while acting as a mediator between those requests.
 
