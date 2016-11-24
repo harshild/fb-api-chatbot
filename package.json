@@ -19,6 +19,7 @@
   "homepage": "https://bitbucket.org/harshild/job-chatbot#readme",
   "dependencies": {
     "apiai": "^3.0.2",
+    "async": "^2.1.4",
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
     "express": "^4.14.0",
