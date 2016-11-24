@@ -3,7 +3,7 @@
 const fs = require('fs');
 
 module.exports.saveChatToFile = function (sessionId,user,message) {
-    fs.writeFile("/tmp/test_"+sessionId+".txt", user+" : "+message, function (err) {
+    fs.writeFile("/tmp/chat_log_"+sessionId+".txt", user+" : "+message, function (err) {
         if (err) {
             return console.log(err);
         }

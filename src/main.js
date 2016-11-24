@@ -17,15 +17,11 @@ app.use(bodyParser.text({ type: 'application/json' }));
 function processMessagingRequest(event) {
     var sender = event.sender.id.toString();
 
-    
     if (fbMessengerService.isEventATextMessage(event)) {
         var text = event.message ? event.message.text : event.postback.payload;
-
         appUtils.setSessionId(sender);
-        console.log("Text", text);
-
+        chatLogger.saveChatToFile(appUtils.getSessionId(sender),"FB User",text);
         apiaiService.sendMessage(text,sender );
-
     }
 }
 
@@ -88,8 +84,8 @@ module.exports.responseFromApiAI = function (error, response,sender) {
             if(responseText != "") {
                 splittedText = appUtils.splitStringResponse(responseText);
             }
-
             async.eachSeries(splittedText, function (textPart, callback) {
+                chatLogger.saveChatToFile(appUtils.getSessionId(sender),"Bot",textPart);
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
             });
         }
