@@ -12,7 +12,7 @@ WIP
 
 *   ~~Establishing API.AI connectivity~~
 
-*   Facebook Messenger Connectivity
+*   ~~Facebook Messenger Connectivity~~
 
 *   Integration of Facebook Messenger and API.AI (Only Text Messages)
 
@@ -24,6 +24,8 @@ WIP
 | Constant Name   |      Description      |  Type |
 |----------|:-------------:|------:|
 | APIAI_ACCESS_TOKEN |  Your api.ai Client Access Token | REQUIRED |
+| FB_PAGE_ACCESS_TOKEN |  Facebook Page Access Token | REQUIRED |
+| FB_VERIFY_TOKEN | Verification Token for Facebook | REQUIRED |
 
 
 Go to the root of the project and
