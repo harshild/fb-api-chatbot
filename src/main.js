@@ -76,7 +76,6 @@ module.exports.sayHello = function (user) {
 module.exports.responseFromApiAI = function (error, response, sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
-        //TODO Refactoring needed to handle blank response
         var responseText = response.result.fulfillment.speech;
         var responseParameters = response.result.parameters;
         var responseContexts = response.result.contexts;
@@ -86,10 +85,7 @@ module.exports.responseFromApiAI = function (error, response, sender) {
         }
 
         if (appUtils.isObjectDefined(responseText) || responseText == "") {
-            var splittedText = "?";
-            if (responseText != "") {
-                splittedText = appUtils.splitStringResponse(responseText);
-            }
+            var splittedText = responseText != "" ? appUtils.splitStringResponse(responseText) : "I don't know how to answer that!" ;
             async.eachSeries(splittedText, function (textPart, callback) {
                 chatLogger.saveChatToFile(appUtils.getSessionId(sender), "Bot", textPart);
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
