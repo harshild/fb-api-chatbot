@@ -12,13 +12,18 @@ A conversational chat bot that automatically takes details from a job seeker and
 
 * Now logs chat to file 
 
+### 0.3.0
+
+* Database connectivity to store data
+* Very basic UI Interface to view data
+
 # Setup the Application
 ## Pre-Requisites
 
 1. The server on which the application will run must be reachable by facebook server.
-2. [Setup facebook page and app] (https://docs.api.ai/docs/facebook-integration#setting-up-a-facebook-app-and-page)
+2. [Setup facebook page and app](https://docs.api.ai/docs/facebook-integration#setting-up-a-facebook-app-and-page)
 3. [Define your api.ai rules](https://docs.api.ai/docs/get-started) 
-4. [Fetch api.ai tokens] (https://files.readme.io/R0WWGe8yRoOvxQb8dBkx_authentication_tokens.png)
+4. [Fetch api.ai tokens](https://files.readme.io/R0WWGe8yRoOvxQb8dBkx_authentication_tokens.png)
 
 and then follow the steps below
 
@@ -31,6 +36,11 @@ and then follow the steps below
 | FB_VERIFY_TOKEN | Verification Token for Facebook | ✔ | |
 | APIAI_LANG |  Language for API AI |  | 'en'|
 | REST_PORT | Port on which application listens |  | 5000|
+| DATABASE_ENABLE | Enable save data on Postgres Database | | true|
+| DATABASE_URL | Postgres Database URL | ✔ | |
+| TABLE_NAME | Table Name to Store Data | | JOB_SEEKERS|
+
+**Make sure the TABLE_NAME doesn't exist before the application first run, as it might result in an error due to schema mismatch**
 
 When you are done setting these variables, go to the root of the project and
 
@@ -45,12 +55,28 @@ When you are done setting these variables, go to the root of the project and
 `npm start`
 and you are done!
 
+## Accessing the Application
+
+* To use the application a user has to follow the steps to run the application, and then simply start a facebook chat with the respective Facebook Page
+* The UI is available at root of the app. 
+
+## Table Schema
+
+| Column Name  |      Data Type      |  Nullability |
+|----------|:-------------:|------:|
+| ID |  Auto Generated BIGSERIAL | NOT NULL|
+| NAME |  CHAR(50) | NOT NULL|
+| EMAIL | CHAR(50) | NOT NULL|
+| CONTACT_NUMBER |  CHAR(50) | NOT NULL|
+| STREAM | CHAR(50) | NOT NULL|
+| PREFERRED_LOCATION | CHAR(50) |NOT NULL|
+| CURRENT_COMPANY | CHAR(50) | NOT NULL|
+| CURRENT_CTC | CHAR(50) |NOT NULL|
+| EXPECTED_CTC | CHAR(50) |NOT NULL|
+
+Make sure that API AI parameters and the table column names are consistent
+
 # UPCOMING RELEASES ROADMAP
-
-0.3.0
-
-* Database connectivity to store data
-* Very basic UI Interface to view data
 
 0.4.0
 

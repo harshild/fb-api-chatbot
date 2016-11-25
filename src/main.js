@@ -10,9 +10,11 @@ const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
 const appUtils = require('./appUtils');
 const chatLogger = require('./chatLogger');
+const databaseService = require('./databaseService');
 
 
 app.use(bodyParser.text({ type: 'application/json' }));
+app.use(express.static(__dirname + '/public'));
 
 function processMessagingRequest(event) {
     var sender = event.sender.id.toString();
@@ -20,8 +22,8 @@ function processMessagingRequest(event) {
     if (fbMessengerService.isEventATextMessage(event)) {
         var text = event.message ? event.message.text : event.postback.payload;
         appUtils.setSessionId(sender);
-        chatLogger.saveChatToFile(appUtils.getSessionId(sender),"FB User",text);
-        apiaiService.sendMessage(text,sender );
+        chatLogger.saveChatToFile(appUtils.getSessionId(sender), "FB User", text);
+        apiaiService.sendMessage(text, sender);
     }
 }
 
@@ -68,23 +70,34 @@ app.post('/webhook/', function (req, res) {
 
 });
 
+app.get('/getTableData', function (req, res) {
+    databaseService.fetchTableData();
+
+    setTimeout(function () {
+        return res.send(databaseService.readFetchedData());
+    }, 3000);
+});
+
+
 module.exports.sayHello = function (user) {
     return "Hello " + user;
 }
 
-module.exports.responseFromApiAI = function (error, response,sender) {
+module.exports.responseFromApiAI = function (error, response, sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
-        //TODO Refactoring needed to handle blank response
         var responseText = response.result.fulfillment.speech;
-        
+        var responseParameters = response.result.parameters;
+        var responseContexts = response.result.contexts;
+
+        if (apiaiService.isLastMessage(responseContexts, responseParameters)) {
+            databaseService.updateTable(responseParameters);
+        }
+
         if (appUtils.isObjectDefined(responseText) || responseText == "") {
-            var splittedText = "?";
-            if(responseText != "") {
-                splittedText = appUtils.splitStringResponse(responseText);
-            }
+            var splittedText = responseText != "" ? appUtils.splitStringResponse(responseText) : "I don't know how to answer that!" ;
             async.eachSeries(splittedText, function (textPart, callback) {
-                chatLogger.saveChatToFile(appUtils.getSessionId(sender),"Bot",textPart);
+                chatLogger.saveChatToFile(appUtils.getSessionId(sender), "Bot", textPart);
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
             });
         }
