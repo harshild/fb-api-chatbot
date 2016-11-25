@@ -12,6 +12,11 @@ A conversational chat bot that automatically takes details from a job seeker and
 
 * Now logs chat to file 
 
+### 0.3.0
+
+* Database connectivity to store data
+* Very basic UI Interface to view data
+
 # Setup the Application
 ## Pre-Requisites
 
@@ -72,11 +77,6 @@ and you are done!
 Make sure that API AI parameters and the table column names are consistent
 
 # UPCOMING RELEASES ROADMAP
-
-0.3.0
-
-* Database connectivity to store data
-* Very basic UI Interface to view data
 
 0.4.0
 
