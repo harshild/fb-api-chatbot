@@ -2,6 +2,19 @@
 <html ng-app="mainApp" ng-controller="mainCtrl">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="main.js"></script>
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
 
 <head>
     <meta charset="UTF-8">
@@ -10,9 +23,17 @@
 
 <body>
 
-Hello World! {{name}}
+    Hello World! {{name}}
 
-<div id="dvTable"></div>
+    <table>
+        <tr>
+            <th ng-repeat="(key, value) in dataRows[0]">{{key}}</th>
+        </tr>
+        <tr ng-repeat="dataRow in dataRows">
+            <td ng-repeat="(key, value) in dataRow">{{ value }}</td>
+        </tr>
+    </table>
+
 </body>
 
 </html>
