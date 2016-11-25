@@ -69,6 +69,15 @@ app.post('/webhook/', function (req, res) {
 
 });
 
+app.get('/getTableData', function (req, res) {
+    databaseService.fetchTableData();
+
+    setTimeout(function () {
+        return res.send(databaseService.readFetchedData());
+    }, 3000);
+});
+
+
 module.exports.sayHello = function (user) {
     return "Hello " + user;
 }
