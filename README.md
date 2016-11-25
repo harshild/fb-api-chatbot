@@ -80,6 +80,8 @@ Make sure that API AI parameters and the table column names are consistent
 
 ## Docker
 
+`Dockerfile` at the root of project is used to run app through docker.
+
 From the root of the source code, execute to build image
 ```
 bash docker build -t chatbot . 
@@ -98,6 +100,12 @@ docker run -it --name chatbot_instance \
            -e TABLE_NAME="JOB_SEEKERS" \
            chatbot
 ```
+
+
+## Heroku
+
+`app.json` at the root of project is used to deploy app on Heroku.
+
 
 # UPCOMING RELEASES ROADMAP
 
