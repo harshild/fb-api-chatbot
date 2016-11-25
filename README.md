@@ -16,9 +16,9 @@ A conversational chat bot that automatically takes details from a job seeker and
 ## Pre-Requisites
 
 1. The server on which the application will run must be reachable by facebook server.
-2. [Setup facebook page and app] (https://docs.api.ai/docs/facebook-integration#setting-up-a-facebook-app-and-page)
+2. [Setup facebook page and app](https://docs.api.ai/docs/facebook-integration#setting-up-a-facebook-app-and-page)
 3. [Define your api.ai rules](https://docs.api.ai/docs/get-started) 
-4. [Fetch api.ai tokens] (https://files.readme.io/R0WWGe8yRoOvxQb8dBkx_authentication_tokens.png)
+4. [Fetch api.ai tokens](https://files.readme.io/R0WWGe8yRoOvxQb8dBkx_authentication_tokens.png)
 
 and then follow the steps below
 
