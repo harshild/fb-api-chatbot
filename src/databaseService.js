@@ -45,3 +45,32 @@ module.exports.updateTable = function (data) {
         });
     }
 }
+
+module.exports.fetchTableData = function () {
+    var pg = require('pg');
+    var rows = [];
+
+
+    pg.defaults.ssl = true;
+    if (constants.DATABASE_ENABLE !== true) return tableData.push({ "error": "Databse Service not being used. DATABASE_ENABLE is not true" })
+    pg.connect(constants.DATABASE_URL, function (err, client) {
+        if (err) {
+            tableData.push({ "error": err.message })
+        }
+
+        var a = true;
+        client
+            .query('SELECT * FROM ' + constants.TABLE_NAME + ';')
+            .on('row', function (row) {
+                rows.push(row);
+            })
+            .on('end', function () {
+                tableData = rows;
+            });
+    });
+
+}
+
+module.exports.readFetchedData = function () {
+    return tableData;
+}

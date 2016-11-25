@@ -50,6 +50,11 @@ When you are done setting these variables, go to the root of the project and
 `npm start`
 and you are done!
 
+## Accessing the Application
+
+* To use the application a user has to follow the steps to run the application, and then simply start a facebook chat with the respective Facebook Page
+* The UI is available at root of the app. 
+
 ## Table Schema
 
 | Column Name  |      Data Type      |  Nullability |
