@@ -3,17 +3,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="main.js"></script>
 <style>
-table, th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
-}
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}
+    table,
+    th,
+    td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    
+    table tr:nth-child(odd) {
+        background-color: #f1f1f1;
+    }
+    
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
 </style>
 
 <head>
@@ -23,8 +28,12 @@ table tr:nth-child(even) {
 
 <body>
 
-    Hello World! {{name}}
+    <h1> Job Application Data </h1>
 
+    <button ng-click="getTableData()"> Refresh Data </button>
+    <div ng-model="a" ng-show="reqInProgress"> Refreshing Data . Please Wait .. </div>
+
+    <div ng-model="a" ng-show="dataRows.length == 0"> No Data</div>
     <table>
         <tr>
             <th ng-repeat="(key, value) in dataRows[0]">{{key}}</th>
