@@ -40,6 +40,6 @@ module.exports.sendFBMessage = function (sender, messageData, callback) {
     });
 }
 
-module.exports.isEventATextMessage = function(event){
+module.exports.isEventATextMessage = function (event) {
     return (event.message && event.message.text) || (event.postback && event.postback.payload);
 }

@@ -12,12 +12,20 @@ module.exports.sendMessage = function (textQuery, sender) {
     })
 
         .on('response', function (response) {
-            main.responseFromApiAI(null, response,sender);
+            main.responseFromApiAI(null, response, sender);
         })
 
         .on('error', function (error) {
-            main.responseFromApiAI(error, null,sender);
+            main.responseFromApiAI(error, null, sender);
         });
 
     request.end();
+}
+
+
+module.exports.isLastMessage = function (responseContexts, responseParameters) {
+    return appUtils.isObjectDefined(responseContexts)
+        && responseContexts.length == 0
+        && appUtils.isObjectDefined(responseParameters)
+        && responseParameters.length != 0;
 }
