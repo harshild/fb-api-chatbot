@@ -31,6 +31,11 @@ and then follow the steps below
 | FB_VERIFY_TOKEN | Verification Token for Facebook | ✔ | |
 | APIAI_LANG |  Language for API AI |  | 'en'|
 | REST_PORT | Port on which application listens |  | 5000|
+| DATABASE_ENABLE | Enable save data on Postgres Database | | true|
+| DATABASE_URL | Postgres Database URL | ✔ | |
+| TABLE_NAME | Table Name to Store Data | | JOB_SEEKERS|
+
+**Make sure the TABLE_NAME doesn't exist before the application first run, as it might result in an error due to schema mismatch**
 
 When you are done setting these variables, go to the root of the project and
 
@@ -44,6 +49,22 @@ When you are done setting these variables, go to the root of the project and
 
 `npm start`
 and you are done!
+
+## Table Schema
+
+| Column Name  |      Data Type      |  Nullability |
+|----------|:-------------:|------:|
+| ID |  Auto Generated BIGSERIAL | NOT NULL|
+| NAME |  CHAR(50) | NOT NULL|
+| EMAIL | CHAR(50) | NOT NULL|
+| CONTACT_NUMBER |  CHAR(50) | NOT NULL|
+| STREAM | CHAR(50) | NOT NULL|
+| PREFERRED_LOCATION | CHAR(50) |NOT NULL|
+| CURRENT_COMPANY | CHAR(50) | NOT NULL|
+| CURRENT_CTC | CHAR(50) |NOT NULL|
+| EXPECTED_CTC | CHAR(50) |NOT NULL|
+
+Make sure that API AI parameters and the table column names are consistent
 
 # UPCOMING RELEASES ROADMAP
 

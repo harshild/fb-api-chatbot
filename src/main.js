@@ -10,6 +10,7 @@ const constants = require('./constants');
 const fbMessengerService = require('./fbMessengerService');
 const appUtils = require('./appUtils');
 const chatLogger = require('./chatLogger');
+const databaseService = require('./databaseService');
 
 
 app.use(bodyParser.text({ type: 'application/json' }));
@@ -20,8 +21,8 @@ function processMessagingRequest(event) {
     if (fbMessengerService.isEventATextMessage(event)) {
         var text = event.message ? event.message.text : event.postback.payload;
         appUtils.setSessionId(sender);
-        chatLogger.saveChatToFile(appUtils.getSessionId(sender),"FB User",text);
-        apiaiService.sendMessage(text,sender );
+        chatLogger.saveChatToFile(appUtils.getSessionId(sender), "FB User", text);
+        apiaiService.sendMessage(text, sender);
     }
 }
 
@@ -72,19 +73,25 @@ module.exports.sayHello = function (user) {
     return "Hello " + user;
 }
 
-module.exports.responseFromApiAI = function (error, response,sender) {
+module.exports.responseFromApiAI = function (error, response, sender) {
     if (error) return console.error("Error from API AI" + error);
     if (appUtils.isObjectDefined(response.result)) {
         //TODO Refactoring needed to handle blank response
         var responseText = response.result.fulfillment.speech;
-        
+        var responseParameters = response.result.parameters;
+        var responseContexts = response.result.contexts;
+
+        if (apiaiService.isLastMessage(responseContexts, responseParameters)) {
+            databaseService.updateTable(responseParameters);
+        }
+
         if (appUtils.isObjectDefined(responseText) || responseText == "") {
             var splittedText = "?";
-            if(responseText != "") {
+            if (responseText != "") {
                 splittedText = appUtils.splitStringResponse(responseText);
             }
             async.eachSeries(splittedText, function (textPart, callback) {
-                chatLogger.saveChatToFile(appUtils.getSessionId(sender),"Bot",textPart);
+                chatLogger.saveChatToFile(appUtils.getSessionId(sender), "Bot", textPart);
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
             });
         }
