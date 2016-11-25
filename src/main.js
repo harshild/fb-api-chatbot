@@ -14,6 +14,7 @@ const databaseService = require('./databaseService');
 
 
 app.use(bodyParser.text({ type: 'application/json' }));
+app.use(express.static(__dirname + '/public'));
 
 function processMessagingRequest(event) {
     var sender = event.sender.id.toString();
