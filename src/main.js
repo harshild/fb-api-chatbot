@@ -95,7 +95,7 @@ module.exports.responseFromApiAI = function (error, response, sender) {
         }
 
         if (appUtils.isObjectDefined(responseText) || responseText == "") {
-            var splittedText = responseText != "" ? appUtils.splitStringResponse(responseText) : "I don't know how to answer that!" ;
+            var splittedText = appUtils.splitStringResponse(responseText != "" ? responseText : "I don't know how to answer that!" );
             async.eachSeries(splittedText, function (textPart, callback) {
                 chatLogger.saveChatToFile(appUtils.getSessionId(sender), "Bot", textPart);
                 fbMessengerService.sendFBMessage(sender, { text: textPart }, callback);
