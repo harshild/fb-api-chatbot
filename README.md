@@ -106,6 +106,8 @@ docker run -it --name chatbot_instance \
 
 `app.json` at the root of project is used to deploy app on Heroku.
 
+Follow [this](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article for more details on deployment using Heroku.
+
 
 # UPCOMING RELEASES ROADMAP
 
