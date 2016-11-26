@@ -2,6 +2,15 @@
 
 A conversational chat bot that automatically takes details from a job seeker and takes necessary actions.
 
+# Technologies Used #
+
+- NPM
+- Node.js
+- API.AI
+- AngularJS + HTML
+- Postgres
+- Docker
+
 ## Releases
 
 ### 0.1.0
