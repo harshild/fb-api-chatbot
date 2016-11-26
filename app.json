@@ -1,0 +1,48 @@
+{
+  "name": "Job Application Responder",
+  "description": "An API.AI + FB + POSTGRES + FILE_LOG implementation for Job Application Responder ",
+  "keywords": ["api.ai", "facebook", "natural language","job"],
+  "env": {
+    "APIAI_ACCESS_TOKEN": {
+      "description": "Client access token for Api.ai",
+      "value": ""
+    },
+    "FB_VERIFY_TOKEN": {
+      "description": "Verification code",
+      "value": ""
+    },
+    "FB_PAGE_ACCESS_TOKEN": {
+      "description": "Page Access Token",
+      "value": ""
+    },
+    "APIAI_LANG": {
+      "description": "Agent language",
+      "value": "",
+      "required": false
+    },
+    "REST_PORT": {
+      "description": "Rest Port",
+      "value": "",
+      "required": false
+    },
+    "DATABASE_ENABLE": {
+      "description": "Enable Database save",
+      "value": true,
+      "required": false
+    },
+    "DATABASE_URL": {
+      "description": "Database URL if Database save enabled",
+      "value": "",
+      "required": false
+    },
+    "TABLE_NAME": {
+      "description": "Table Name if Database save enabled",
+      "value": "",
+      "required": false
+    }
+
+  },
+  "engines": {
+    "node": "5.10.1"
+  }
+}
