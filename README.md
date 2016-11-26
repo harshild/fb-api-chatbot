@@ -17,6 +17,11 @@ A conversational chat bot that automatically takes details from a job seeker and
 * Database connectivity to store data
 * Very basic UI Interface to view data
 
+### 0.4.0
+
+* Deployment methods available
+
+
 # Setup the Application
 ## Pre-Requisites
 
@@ -111,9 +116,10 @@ Follow [this](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
 
 # UPCOMING RELEASES ROADMAP
 
-0.4.0
+0.5.0
 
-* Readme for alternative deployment methods (preferably Heroku and Docker)
+* UI controls to delete data and acknowledge it
+* Store more information like Date of application, fb URL , session id
 
 # HELP NEEDED IN AREAS
 
