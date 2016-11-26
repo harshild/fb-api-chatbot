@@ -15,6 +15,7 @@ module.exports.updateTable = function (data) {
                 'EMAIL CHAR(50) NOT NULL,' +
                 'CONTACT_NUMBER CHAR(50) NOT NULL,' +
                 'STREAM CHAR(50) NOT NULL,' +
+                'EXPERIENCE CHAR(50) NOT NULL,' +
                 'PREFERRED_LOCATION CHAR(50) NOT NULL,' +
                 'CURRENT_COMPANY CHAR(50) NOT NULL,' +
                 'CURRENT_CTC CHAR(50) NOT NULL,' +
@@ -22,24 +23,37 @@ module.exports.updateTable = function (data) {
                 ');'
             );
 
-            client.query('INSERT INTO ' + TABLE_NAME + '(' +
+            console.log(data);
+            console.log(JSON.stringify(data));
+
+            function getFormattedExperienceValue(EXPERIENCE) {
+                var experienceString = "";
+                EXPERIENCE.forEach(function (data) {
+                    experienceString = experienceString + (data.amount + data.unit + " ");
+                })
+                return experienceString;
+            }
+
+            client.query('INSERT INTO ' + constants.TABLE_NAME + '(' +
                 ' NAME,' +
                 'EMAIL,' +
                 'CONTACT_NUMBER,' +
                 'STREAM,' +
+                'EXPERIENCE,' +
                 'PREFERRED_LOCATION,' +
                 'CURRENT_COMPANY,' +
                 'CURRENT_CTC,' +
                 'EXPECTED_CTC' +
                 ') VALUES (' +
-                data.NAME + ',' +
-                data.EMAIL + ',' +
-                data.CONTACT_NUMBER + ',' +
-                data.STREAM + ',' +
-                data.PREFERRED_LOCATION + ',' +
-                data.CURRENT_COMPANY + ',' +
-                data.CURRENT_CTC + ',' +
-                data.EXPECTED_CTC +
+                '\''+data.NAME + '\',' +
+                '\''+data.EMAIL + '\',' +
+                '\''+data.CONTACT_NUMBER + '\',' +
+                '\''+data.STREAM + '\',' +
+                '\''+getFormattedExperienceValue(data.EXPERIENCE) + '\',' +
+                '\''+data.PREFERRED_LOCATION + '\',' +
+                '\''+data.CURRENT_COMPANY + '\',' +
+                '\''+data.CURRENT_CTC + '\',' +
+                '\''+data.EXPECTED_CTC + '\''+
                 ');'
             )
         });
