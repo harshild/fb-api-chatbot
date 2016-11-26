@@ -45,6 +45,8 @@ and then follow the steps below
 | DATABASE_URL | Postgres Database URL | ✔ | |
 | TABLE_NAME | Table Name to Store Data | | JOB_SEEKERS|
 
+Set **APIAI_ACCESS_TOKEN** as **81b16a51d421459d8227fb2c6fceb913** to link to a JobAssistant already configured.
+
 **Make sure the TABLE_NAME doesn't exist before the application first run, as it might result in an error due to schema mismatch**
 
 When you are done setting these variables, go to the root of the project and
