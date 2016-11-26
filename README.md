@@ -76,6 +76,39 @@ and you are done!
 
 Make sure that API AI parameters and the table column names are consistent
 
+#Alternative Deployment Methods
+
+## Docker
+
+`Dockerfile` at the root of project is used to run app through docker.
+
+From the root of the source code, execute to build image
+```
+bash docker build -t chatbot . 
+```
+
+and execute this to start it up!
+```bash
+docker run -it --name chatbot_instance \
+           -p <REST_PORT>:5000 \
+           -e APIAI_ACCESS_TOKEN="api.ai client access token" \
+           -e FB_PAGE_ACCESS_TOKEN="Fb Page Access Token" \
+           -e FB_VERIFY_TOKEN="Fb Verify Token" \
+           -e APIAI_LANG="en" \
+           -e DATABASE_ENABLE="true" \
+           -e DATABASE_URL="URL" \
+           -e TABLE_NAME="JOB_SEEKERS" \
+           chatbot
+```
+
+
+## Heroku
+
+`app.json` at the root of project is used to deploy app on Heroku.
+
+Follow [this](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article for more details on deployment using Heroku.
+
+
 # UPCOMING RELEASES ROADMAP
 
 0.4.0
