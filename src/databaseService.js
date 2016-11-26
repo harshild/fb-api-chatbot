@@ -72,7 +72,6 @@ module.exports.fetchTableData = function () {
             tableData.push({ "error": err.message })
         }
 
-        var a = true;
         client
             .query('SELECT * FROM ' + constants.TABLE_NAME + ';')
             .on('row', function (row) {
