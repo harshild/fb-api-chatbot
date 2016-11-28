@@ -1,7 +1,7 @@
 var apiai = require('apiai');
 var constants = require('./constants')
 var main = require('./main')
-var appUtils = require('./appUtils')
+var appUtils = require('./app-utils')
 
 module.exports.sendMessage = function (textQuery, sender) {
     var sessionId = appUtils.getSessionId(sender);

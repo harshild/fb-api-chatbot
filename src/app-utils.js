@@ -1,30 +1,32 @@
 const sessionIds = new Map();
 const uuid = require('node-uuid');
 
-module.exports.splitStringResponse = function(str) {
+module.exports.splitStringResponse = function (str) {
     if (str.length <= 320) {
         return [str];
     }
     return chunkString(str, 300);
 }
 
-module.exports.setSessionId = function(sender) {
+module.exports.setSessionId = function (sender) {
     if (!sessionIds.has(sender)) {
         sessionIds.set(sender, uuid.v1());
     }
 }
 
-module.exports.getSessionId = function(sender) {
+module.exports.getSessionId = function (sender) {
     return sessionIds.get(sender)
 };
 
-module.exports.isObjectDefined = function(obj) {
+module.exports.isObjectDefined = function (obj) {
     if (typeof obj == 'undefined') {
         return false;
     }
-    if (!obj) {
+
+    if (obj == 'undefined' || obj == 'null') {
         return false;
     }
+
     return obj != null;
 }
 
