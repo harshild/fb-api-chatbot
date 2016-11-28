@@ -1,16 +1,16 @@
 'use strict';
 
-const apiaiService = require('./apiaiService');
+const apiaiService = require('./apiai-service');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const async = require('async');
 const jsonBigInt = require('json-bigint');
 const constants = require('./constants');
-const fbMessengerService = require('./fbMessengerService');
-const appUtils = require('./appUtils');
-const chatLogger = require('./chatLogger');
-const databaseService = require('./databaseService');
+const fbMessengerService = require('./fb-messenger-service');
+const appUtils = require('./app-utils');
+const chatLogger = require('./chat-logger');
+const databaseService = require('./database-service');
 
 
 app.use(bodyParser.text({ type: 'application/json' }));

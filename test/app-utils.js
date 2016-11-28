@@ -1,5 +1,5 @@
 var expect = require("chai").expect;
-const appUtils = require('../src/appUtils');
+const appUtils = require('../src/app-utils');
 
 
 describe("Object validity check", function () {
